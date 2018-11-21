@@ -75,31 +75,50 @@ public class playerDesktop implements FocusListener {
 
 
         //设置右侧界面
-        JPanel songsBox = new JPanel(new GridLayout(2,1));
-        songsBox.setPreferredSize(new Dimension(1024/3, 500));
+        JPanel rightBox = new JPanel(new GridLayout(2,1));
+        rightBox.setPreferredSize(new Dimension(1024/3, 500));
 
         //歌单
-        JPanel listBox = new JPanel(new BorderLayout());
-
-        //歌单标题
-        JLabel listTopic = new JLabel("所有歌单");
-        listTopic.setHorizontalAlignment(SwingConstants.LEFT);
-        listTopic.setPreferredSize(new Dimension(1020/3, 50));
-        Icon listIcon = new ImageIcon("E:/player/timg1.jpg");
-        ((ImageIcon) listIcon).setImage(((ImageIcon) listIcon).getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
-        listTopic.setIcon(listIcon);
-        listBox.add(BorderLayout.NORTH,listTopic);
-
-        //歌单内容
-        JScrollPane list = new JScrollPane();
         JList lists = new JList(songsLists);
-        list.add(lists);
-        list.setPreferredSize(new Dimension(1020/3, 400));
-        listBox.add(BorderLayout.CENTER,list);
+        lists.setBorder(BorderFactory.createTitledBorder("所有歌单"));//设置标题
+        //后端完成修改参数
+        JScrollPane listsContent = new JScrollPane(lists);
+        //
+        JPanel listsBox = new JPanel(new BorderLayout());
+        listsBox.add(BorderLayout.CENTER, listsContent);
+        //翻页
+        JButton prePage_list = new JButton("上一页");
+        JButton nextPage_list = new JButton("下一页");
+        JPanel tempPage_list = new JPanel(new GridLayout(1,2));
+        tempPage_list.add(prePage_list);
+        tempPage_list.add(nextPage_list);
+        listsBox.add(BorderLayout.SOUTH, tempPage_list);
+        rightBox.add(listsBox);
 
-        songsBox.add(listBox);
-        mainContainer.add(BorderLayout.EAST,songsBox);
+        //歌曲
+        JList songs = new JList(songsLists);
+        songs.setBorder(BorderFactory.createTitledBorder("当前歌单中的歌曲"));//设置标题
+        //后端完成修改参数
+        JScrollPane songsContent = new JScrollPane(songs);
+        //
+        JPanel songsBox = new JPanel(new BorderLayout());
+        songsBox.add(BorderLayout.CENTER, songsContent);
+        //翻页
+        JButton prePage_songs = new JButton("上一页");
+        JButton nextPage_songs = new JButton("下一页");
+        JPanel tempPage_songs = new JPanel(new GridLayout(1,2));
+        tempPage_songs.add(prePage_songs);
+        tempPage_songs.add(nextPage_songs);
+        songsBox.add(BorderLayout.SOUTH, tempPage_songs);
+        rightBox.add(songsBox);
 
+        mainContainer.add(BorderLayout.EAST,rightBox);
+
+        //设置播放界面
+        JPanel playerIndex = new JPanel(new BorderLayout());
+        playerIndex.setBackground(Color.orange);
+        mainContainer.add(BorderLayout.CENTER,playerIndex);
+        //播放界面底部
         //设置主框架属性
         mainLayout.setTitle("滑稽播放器——滑天下之大稽");
         mainLayout.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -113,8 +132,8 @@ public class playerDesktop implements FocusListener {
     public void focusGained(FocusEvent e) {
         JTextField jTextField = (JTextField)e.getSource();
 
-        if(jTextField.getText().equals("请输入你要搜索的歌曲")){
-            jTextField.setText("");
+        if(jTextField.getText().equals("输入在当前歌单要搜索的歌曲")){
+            jTextField.setText(null);
             jTextField.setForeground(Color.BLACK);
         }
     }
