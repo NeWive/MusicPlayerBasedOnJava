@@ -1,43 +1,44 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Vector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TestDemo {
-
+    private static int currentProgress = 20;
     public static void main(String[] args) {
         JFrame f=new JFrame();
-        Container contentpane=f.getContentPane();
-        f.setLayout(new GridLayout(1, 2));
-        String[] s=new String[]{"日本","英国","法国","中国","美国"};
-        Vector v=new Vector();
-        v.addElement("nokia 8850");
-        v.addElement("nokia 8250");
-        v.addElement("notorola v8088");
-        v.addElement("motorola v3688");
-        v.addElement("panasonic GD92");
-        v.addElement("其他");
-
-        JList jList=new JList(s);
-        jList.setBorder(BorderFactory.createTitledBorder("您最喜欢到哪个国家玩呢"));
-
-        JList jList2=new JList(v);
-        jList2.setBorder(BorderFactory.createTitledBorder("你最喜欢哪部手机呢"));
-        contentpane.add(new JScrollPane(jList));
-        contentpane.add(new JScrollPane(jList2));
-        contentpane.add(jList2);
-//        f.pack();
-        f.setSize(1024,680);
-//        f.show();
-        f.setVisible(true);
-        f.addWindowListener(new WindowAdapter() {
-
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        final Container contentpane=f.getContentPane();
+        final JProgressBar jProgressBar = new JProgressBar();
+        jProgressBar.setMinimum(0);
+        jProgressBar.setMaximum(100);
+        jProgressBar.setValue(currentProgress);
+        jProgressBar.setStringPainted(true);
+        jProgressBar.setSize(1000, 2);
+        jProgressBar.addChangeListener(new ChangeListener() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                // TODO Auto-generated method stub
-                System.exit(0);
+            public void stateChanged(ChangeEvent e) {
+
+                System.out.println(jProgressBar.getPercentComplete());
             }
         });
+        contentpane.add(jProgressBar);
+        f.setVisible(true);
+        f.pack();
+        Timer count = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(currentProgress > 100){
+
+                }else{
+                    currentProgress++;
+                    jProgressBar.setValue(currentProgress);
+                }
+
+            }
+        });
+        count.start();
     }
 }

@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
 
+import static javax.swing.BorderFactory.createLineBorder;
+
 public class playerDesktop implements FocusListener {
     String hintText = "请输入你要搜索的歌曲";
     Vector<String> songsLists = new Vector<String>();
@@ -118,11 +120,41 @@ public class playerDesktop implements FocusListener {
         JPanel playerIndex = new JPanel(new BorderLayout());
         playerIndex.setBackground(Color.orange);
         mainContainer.add(BorderLayout.CENTER,playerIndex);
+
         //播放界面底部
+        JPanel playerIndexBottom = new JPanel(null);
+        playerIndexBottom.setBackground(Color.black);
+        playerIndexBottom.setPreferredSize(new Dimension(700,50));
+        playerIndex.add(BorderLayout.SOUTH, playerIndexBottom);
+
+        //后端完成后修改
+        String songImagePath = "E:/player/timg1.jpg";
+        //
+        Icon songImage = new ImageIcon(songImagePath);
+        JLabel songImage_label = new JLabel("");
+        ((ImageIcon) songImage).setImage(((ImageIcon) songImage).getImage().getScaledInstance(50,50, Image.SCALE_DEFAULT));
+        songImage_label.setIcon(songImage);
+        songImage_label.setBounds(15,0,50,50);
+        songImage_label.setBorder(createLineBorder(Color.red, 1,true ));
+        playerIndexBottom.add(songImage_label);
+
+        //歌名
+        //后端完成后修改,添加函数
+        String songName = "滑稽12312312312321123";
+        JLabel songNameTag = new JLabel(songName);
+        songNameTag.setFont(new Font("宋体", Font.BOLD, 15));
+        songNameTag.setForeground(Color.white);
+        songNameTag.setBounds(80,5, 200,20 );
+        playerIndexBottom.add(songNameTag);
+
+        //添加播放进度条
+
+
         //设置主框架属性
         mainLayout.setTitle("滑稽播放器——滑天下之大稽");
         mainLayout.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainLayout.setSize(1024, 680);
+//        mainLayout.setSize(1024, 680);
+        mainLayout.pack();
         mainLayout.setVisible(true);
         mainLayout.setLocationRelativeTo(null);//设置屏幕中心出现
     }
