@@ -44,7 +44,7 @@ public class playerDesktop implements FocusListener {
         //设置搜索框
         Icon searchIcon = new ImageIcon("E:/player/timg1.jpg");
         Insets inserts = new Insets(0,10,0,0 );
-        JTextField searchArea = new JTextField("",20);
+        JTextField searchArea = new JTextField(null,20);
         searchArea.setText(hintText);
         searchArea.setMargin(inserts);
         searchArea.setName("searchArea");
@@ -148,7 +148,40 @@ public class playerDesktop implements FocusListener {
         playerIndexBottom.add(songNameTag);
 
         //添加播放进度条
+        //后端完成后修改
+        int min = 0;
+        int max = 1000;
+        JLabel showProcess = new JLabel(Integer.toString(200)+"/"+Integer.toString(max));
+        showProcess.setBounds(80, 26, 100, 13);
+        showProcess.setFont(new Font("宋体", Font.BOLD, 14));
+        showProcess.setForeground(Color.white);
+        playerIndexBottom.add(showProcess);
+        //
+        JProgressBar process = new JProgressBar();
+        process.setMinimum(min);
+        process.setMaximum(max);
+        process.setValue(200);
+        process.setStringPainted(true);
+        process.setBounds(80,38,300,5);
+        playerIndexBottom.add(process);
 
+        //添加按钮
+        JButton start = new JButton();
+        start.setBounds(350, 15, 30, 30);
+
+        JButton next = new JButton();
+        start.setBounds(400, 15,30 ,30 );
+
+        JButton previous = new JButton();
+        start.setBounds(300,15,30 , 30);
+
+        JButton stop = new JButton();
+        start.setBounds(450, 15,30 ,30 );
+
+        playerIndexBottom.add(previous);
+        playerIndexBottom.add(start);
+        playerIndexBottom.add(next);
+        playerIndexBottom.add(stop);
 
         //设置主框架属性
         mainLayout.setTitle("滑稽播放器——滑天下之大稽");

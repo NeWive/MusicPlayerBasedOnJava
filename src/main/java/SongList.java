@@ -1,60 +1,75 @@
-import java.util.Arrays;
-
 public class SongList {
-    private String number;
-    private Song[] songs;
-    private String createTime;
-    private String name;
+    private int sheetId;
+    private String sheetName;
+    private String createDate;
+    private String owner;
+    private String coverPath;
 
-    public SongList() {
+    public SongList(int sheetId, String sheetName, String createDate, String owner, String coverPath) {
+        this.sheetId = sheetId;
+        this.sheetName = sheetName;
+        this.createDate = createDate;
+        this.owner = owner;
+        this.coverPath = coverPath;
+    }
+    public SongList(String sheetName, String createDate, String owner, String coverPath) {
+        this.sheetName = sheetName;
+        this.createDate = createDate;
+        this.owner = owner;
+        this.coverPath = coverPath;
     }
 
-    public SongList(String number, Song[] songs, String createTime, String name) {
-        this.name = name;
-        this.songs = songs;
-        this.createTime = createTime;
-        this.number = number;
+    public SongList(){
+
+    }
+    public int getSheetId() {
+        return sheetId;
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public void setSheetId(int sheetId) {
+        this.sheetId = sheetId;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public String getSheetName() {
+        return sheetName;
     }
 
-    public String getName() {
-        return name;
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public String getNumber() {
-        return number;
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
-    public Song[] getSongs() {
-        return songs;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setSongs(Song[] songs) {
-        this.songs = songs;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
     }
 
     @Override
     public String toString() {
         return "SongList{" +
-                "number='" + number + '\'' +
-                ", songs=" + Arrays.toString(songs) +
-                ", createTime='" + createTime + '\'' +
-                ", name='" + name + '\'' +
+                "sheetId=" + sheetId +
+                ", sheetName='" + sheetName + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", owner='" + owner + '\'' +
+                ", coverPath='" + coverPath + '\'' +
                 '}';
     }
 }
